@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teste API</title>
+    <script>
+        
+        function pesquisarCep(){
+        var cep = document.querySelector("#cep")
+        var url = "https://brasilapi.com.br/api/cep/v2/"+cep.value
+
+        var myInit = { method: 'GET',
+               mode: 'cors',
+               cache: 'default' };
+
+        console.log(url)
+
+        fetch(url,myInit)
+          .then(T => T.json())
+          .then(dados => {
+            console.log(dados)
+            
+            const cep = document.querySelector("#cep")
+            cep.value = dados.cep
+
+            const bairro = document.querySelector("#neighborhood")
+            bairro.value = dados.neighborhood
+
+            const rua = document.querySelector("#street")
+            rua.value = dados.street
+
+            const estado = document.querySelector("#state")
+            estado.value = dados.state
+          })}
+        
+
+    </script>
+</head>
+<body>
+    <h1>API CEP</h1>
+    <hr>
+   
+        <label >CEP: </label>
+        <input type="text" id="cep"  placeholder="Insira seu cep">
+        <input type="submit" value="Buscar" onclick="pesquisarCep()">
+        <br>
+        <br>
+        <label for="">Cidade</label>
+        <input type="text"  id="city">
+        <br><br>
+        <label>Bairro</label>
+        <input type="text" id="neighborhood">
+        <br><br>
+        <label for="">Rua</label>
+        <input type="text" id="street">
+        <br><br>
+        <label for="">Estado</label>
+        <input type="text" id="state">
+    
+    <P id="resposta">
+
+    </P>
+</body>
+</html>
